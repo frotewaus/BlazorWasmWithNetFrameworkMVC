@@ -2,30 +2,30 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<h1>Counter component</h1>
+<div id="my-counter" data-amount="3">... Loading ...</div>
+
+<h1>Index component</h1>
+<div id="index">... Loading ...</div>
+
+<h1>Fetch Data component</h1>
+<div id="fetch-data" data-url="Weather">... Loading ...</div>
+
+<script src="_framework/blazor.webassembly.js"></script>
+<script>
+    window.loadCounter = async function () {
+        let containerElement = document.getElementById("my-counter");
+        await Blazor.rootComponents.add(containerElement, 'counter', { incrementAmount: parseInt(containerElement.getAttribute("data-amount") || 1) });
+    };
+
+    window.loadIndex = async function () {
+        let containerElement = document.getElementById("index");
+        await Blazor.rootComponents.add(containerElement, 'index', {});
+    };
+
+    window.loadFetchData = async function () {
+        let containerElement = document.getElementById("fetch-data");
+        await Blazor.rootComponents.add(containerElement, 'fetchData', { DataUrl: containerElement.getAttribute("data-url") });
+    };
+</script>
